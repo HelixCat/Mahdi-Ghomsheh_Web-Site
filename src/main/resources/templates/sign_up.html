@@ -3,7 +3,6 @@
 <html lang="en" direction="rtl" dir="rtl" style="direction: rtl"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://thymeleaf.org">
-<!--begin::Head-->
 
 <head>
     <meta charset="utf-8" />
@@ -11,52 +10,62 @@
     <meta name="description" content="Singin page example" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-    <!--end::Fonts-->
 
 
-    <!--begin::Page Custom Styles(used by this page)-->
     <link href="css/pages/login/login-3.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
-    <!--end::Page Custom Styles-->
-
-    <!--begin::Global تم Styles(used by all pages)-->
     <link href="plugins/global/plugins.bundle.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
     <link href="plugins/custom/prismjs/prismjs.bundle.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
     <link href="css/style.bundle.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
-    <!--end::Global تم Styles-->
-
-    <!--begin::Layout تمs(used by all pages)-->
 
     <link href="css/themes/layout/header/base/light.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
     <link href="css/themes/layout/header/menu/light.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
     <link href="css/themes/layout/brand/dark.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
     <link href="css/themes/layout/aside/dark.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
-    <!--end::Layout تمs-->
 
     <link rel="shortcut icon" href="media/logos/favicon.ico" />
 
 </head>
-<!--end::Head-->
 
-<!--begin::Body-->
+<script>
+
+    function nextButton(){
+        let firstName = document.getElementById("firstName").value;
+        let lastName = document.getElementById("lastName").value;
+        let phoneNumber = document.getElementById("phoneNumber").value;
+        let nationalCode = document.getElementById("nationalCode").value;
+        let email = document.getElementById("email").value;
+        let country = document.getElementById("country").value;
+        let province = document.getElementById("province").value;
+        let city = document.getElementById("city").value;
+        let postalCode = document.getElementById("postalCode").value;
+
+        document.getElementById("firstNameAndLastNameLabel").innerHTML = firstName + " " + lastName;
+        document.getElementById('nationalCodeLabel').innerHTML = nationalCode;
+        document.getElementById('phoneNumberLabel').innerHTML = phoneNumber;
+        document.getElementById('emailLabel').innerHTML = email;
+        document.getElementById('countryLabel').innerHTML = country;
+        document.getElementById('provinceLabel').innerHTML = province;
+        document.getElementById('cityLabel').innerHTML = city;
+        document.getElementById('postalCodeLabel').innerHTML = postalCode;
+    }
+
+</script>
 
 <body id="kt_body"
     class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
-    <!--begin::Main-->
     <div class="d-flex flex-column flex-root">
-        <!--begin::Login-->
+
         <div class="login login-3 wizard d-flex flex-column flex-lg-row flex-column-fluid wizard" id="kt_login">
-            <!--begin::Aside-->
+
             <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #995e5c">
-                <!--begin::Aside Top-->
+
                 <div class="d-flex flex-column-auto flex-column pt-15 px-30">
-                    <!--begin::Aside header-->
                     <a href="home.html" class="text-center mb-10">
-                        <h3>IRAN<span>CRM</span></h3>
+                        <h3>Ghomsheh<span>Website</span></h3>
                     </a>
-                    <!--end::Aside header-->
+
 
                     <!--begin: Wizard Nav-->
                     <div class="wizard-nav pt-5 pt-lg-30">
@@ -152,11 +161,10 @@
                     <!--begin::Signin-->
                     <div class="login-form login-form-signup">
                         <!--begin::Form-->
-                        <form th:action="@{/save}" method="post" th:object="${user}"
+                        <form th:action="@{/save}" method="post" th:object="${userDTO}"
                               class="form" novalidate="novalidate" id="kt_login_signup_form">
                             <!--begin: Wizard Step 1-->
                             <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-                                <!--begin::Title-->
                                 <div class="pb-10 pb-lg-15">
                                     <h3 class="font-weight-bolder text-dark display5">ساخت حساب کاربری</h3>
                                     <div class="text-muted font-weight-bold font-size-h4">
@@ -165,41 +173,83 @@
                                             class="text-primary font-weight-bolder">ورود</a>
                                     </div>
                                 </div>
-                                <!--begin::Title-->
 
-
-                                <!--begin::Form Group-->
-                                <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">نام</label>
-                                    <input type="text"
-                                        class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
-                                        name="fname" placeholder="نام" value="" />
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div class="form-group">
+                                            <label class="font-size-h6 font-weight-bolder text-dark">نام</label>
+                                            <input type="text" th:field="*{firstName}" required
+                                                class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                name="firstName" id="firstName" placeholder="نام"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="form-group">
+                                            <label class="font-size-h6 font-weight-bolder text-dark">نام خانوادگی</label>
+                                            <input type="text" th:field="*{lastName}" required
+                                                class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                name="lastName" id="lastName" placeholder="نام خانوادگی" value="" />
+                                        </div>
+                                    </div>
                                 </div>
-                                <!--end::Form Group-->
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div class="form-group">
+                                            <label class="font-size-h6 font-weight-bolder text-dark">شماره همراه</label>
+                                            <input type="tel" th:field="*{phoneNumber}" required maxlength="11"
+                                                   class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                   name="phoneNumber" id="phoneNumber" placeholder="09121010110" />
+                                        </div>
+                                    </div>
 
-                                <!--begin::Form Group-->
-                                <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">نام خانوادگی</label>
-                                    <input type="text"
-                                        class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
-                                        name="lname" placeholder="نام خانوادگی" value="" />
+                                    <div class="col-xl-6">
+                                        <div class="form-group">
+                                            <label class="font-size-h6 font-weight-bolder text-dark">کد ملی</label>
+                                            <input type="tel" th:field="*{nationalCode}" required maxlength="11"
+                                                   class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                   name="nationalCode" id="nationalCode" placeholder="1234506789" />
+                                        </div>
+                                    </div>
                                 </div>
-                                <!--end::Form Group-->
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <!--begin::Input-->
+                                        <div class="form-group">
+                                            <label class="font-size-h6 font-weight-bolder text-dark">نام کاربری</label>
+                                            <input type="text" th:field="*{userName}" required maxlength="16"
+                                                   class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                   name="userName" />
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
 
-                                <!--begin::Form Group-->
-                                <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">شماره همراه</label>
-                                    <input type="tel"
-                                        class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
-                                        name="phone" placeholder="09121010110" />
+                                    <div class="col-xl-6">
+                                        <!--begin::Input-->
+                                        <div class="form-group">
+                                            <label class="font-size-h6 font-weight-bolder text-dark">پسورد</label>
+                                            <input type="password" th:field="*{password}" required maxlength="4000"
+                                                   class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                   name="password" />
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+
+                                    <div class="col-xl-6">
+                                        <!--begin::Input-->
+                                        <div class="form-group">
+                                            <label class="font-size-h6 font-weight-bolder text-dark">پست الکترونیک</label>
+                                            <input type="email" th:field="*{email}" required maxlength="60"
+                                                   class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                   name="email" id="email" placeholder="a.b@example.com" />
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+
                                 </div>
-                                <!--end::Form Group-->
                             </div>
-                            <!--end: Wizard Step 1-->
 
-                            <!--begin: Wizard Step 2-->
                             <div class="pb-5" data-wizard-type="step-content">
-                                <!--begin::Title-->
+
                                 <div class="pt-lg-0 pt-5 pb-15">
                                     <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">جزییات آدرس
                                     </h3>
@@ -208,374 +258,49 @@
                                         <a href="#" class="text-primary font-weight-bolder">افزودن ادرس</a>
                                     </div>
                                 </div>
-                                <!--begin::Title-->
-
-                                <!--begin::Row-->
                                 <div class="row">
 
-
-
-
-
-
                                     <div class="col-xl-6">
-                                        <!--begin::انتخاب-->
                                         <div class="form-group">
                                             <label class="font-size-h6 font-weight-bolder text-dark">کشور</label>
-                                            <select name="country"
-                                                class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
-                                                <option value="">انتخاب</option>
-                                                <option value="AF">افغانستان</option>
-                                                <option value="AX">جزایر الند</option>
-                                                <option value="AL">آلبانی</option>
-                                                <option value="DZ">الجزایر</option>
-                                                <option value="AS">ساموآ آمریکایی</option>
-                                                <option value="AD">آندورا</option>
-                                                <option value="AO">آنگولا</option>
-                                                <option value="AI">آنگولا</option>
-                                                <option value="AQ">جنوبگان</option>
-                                                <option value="AG">آنتیگوا و باربودا</option>
-                                                <option value="AR">آرژانتین</option>
-                                                <option value="AM">ارمنستان</option>
-                                                <option value="AW">آروبا</option>
-                                                <option value="AU" selected>استرالیا</option>
-                                                <option value="AT">اتریش</option>
-                                                <option value="AZ">آذربایجان</option>
-                                                <option value="BS">باهاما</option>
-                                                <option value="BH">بحرین</option>
-                                                <option value="BD">بنگلادش</option>
-                                                <option value="BB">باربادوس</option>
-                                                <option value="BY">بلاروس</option>
-                                                <option value="BE">بلژیک</option>
-                                                <option value="BZ">بلیز</option>
-                                                <option value="BJ">بنین</option>
-                                                <option value="BM">برمودا</option>
-                                                <option value="BT">بوتان</option>
-                                                <option value="BO">پلورسالن</option>
-                                                <option value="BQ"> سنیت</option>
-                                                <option value="BA">بوسنی و هرزگوین</option>
-                                                <option value="BW">بوتسوانا</option>
-                                                <option value="BV">جزیره بوت</option>
-                                                <option value="BR">برزیل</option>
-                                                <option value="IO">قلمرو اقیانوس هند انگلیس</option>
-                                                <option value="BN">برونئی دارالسلام</option>
-                                                <option value="BG">بلغارستان</option>
-                                                <option value="BF">بورکینافاسو</option>
-                                                <option value="BI">بوروندی</option>
-                                                <option value="KH">کامبوج</option>
-                                                <option value="CM">کامرون</option>
-                                                <option value="CA">کانادا</option>
-                                                <option value="CV">کیپ ورد</option>
-                                                <option value="KY">جزایر کیمن</option>
-                                                <option value="CF">جمهوری آفریقای مرکزی</option>
-                                                <option value="TD">چاد</option>
-                                                <option value="CL">شیلی</option>
-                                                <option value="CN">چین</option>
-                                                <option value="CX">جزیره کریسمس</option>
-                                                <option value="CC">جزایر کوکو </option>
-                                                <option value="CO">کلمبیا</option>
-                                                <option value="KM">کومور</option>
-                                                <option value="CG">کنگو</option>
-                                                <option value="CD">کنگو</option>
-                                                <option value="CK">جزایر کوک</option>
-                                                <option value="CR">کاستاریکا</option>
-                                                <option value="CI">ساحل عاج</option>
-                                                <option value="HR">کرواسی</option>
-                                                <option value="CU">کوبا</option>
-                                                <option value="CW">کوراسائو</option>
-                                                <option value="CY">قبرس</option>
-                                                <option value="CZ">جمهوری چک</option>
-                                                <option value="DK">دانمارک</option>
-                                                <option value="DJ">جیبوتی</option>
-                                                <option value="DM">دومینیکا</option>
-                                                <option value="DO">جمهوری دومینکا</option>
-                                                <option value="EC">اکوادور</option>
-                                                <option value="EG">مصر</option>
-                                                <option value="SV">السالوادور</option>
-                                                <option value="GQ">گینه استوایی</option>
-                                                <option value="ER">اریتره</option>
-                                                <option value="EE">استونی</option>
-                                                <option value="ET">اتیوپی</option>
-                                                <option value="FK">جزایر فالکلند (مالویناس)</option>
-                                                <option value="FO">جزایر فارو</option>
-                                                <option value="FJ">فیجی</option>
-                                                <option value="FI">فنلاند</option>
-                                                <option value="FR">فرانسه</option>
-                                                <option value="GF">گویان فرانسه</option>
-                                                <option value="PF">پلی‌نزی فرانسه</option>
-                                                <option value="TF">سرزمین های جنوبی فرانسه</option>
-                                                <option value="GA">گابن</option>
-                                                <option value="GM">گامبیا</option>
-                                                <option value="GE">جورجیا</option>
-                                                <option value="DE">آلمان</option>
-                                                <option value="GH">غنا</option>
-                                                <option value="GI">جبل الطارق</option>
-                                                <option value="GR">یونان</option>
-                                                <option value="GL">گرینلند</option>
-                                                <option value="GD">گرنادا</option>
-                                                <option value="GP">گوادلوپ</option>
-                                                <option value="GU">گوام</option>
-                                                <option value="GT">گواتمالا</option>
-                                                <option value="GG">گورنسی</option>
-                                                <option value="GN">گینه</option>
-                                                <option value="GW">گینه بیساو</option>
-                                                <option value="GY">گویان</option>
-                                                <option value="HT">هائیتی</option>
-                                                <option value="HM">جزایر هارد و جزایر مک دونالد</option>
-                                                <option value="VA">مقدس (شهر واتیکان شهر استان)</option>
-                                                <option value="HN">هندوراس</option>
-                                                <option value="HK">هنگ کنگ</option>
-                                                <option value="HU">مجارستان</option>
-                                                <option value="IS">ایسلند</option>
-                                                <option value="IN">هند</option>
-                                                <option value="ID">اندونزی</option>
-                                                <option value="IR">جمهوری اسلامی ایران</option>
-                                                <option value="IQ">عراق</option>
-                                                <option value="IE">ایرلند</option>
-                                                <option value="IM">جزیره من</option>
-                                                <option value="IL">اسرائيل</option>
-                                                <option value="IT">ایتالیا</option>
-                                                <option value="JM">جامائیکا</option>
-                                                <option value="JP">ژاپن</option>
-                                                <option value="JE">پیراهن ورزشی</option>
-                                                <option value="JO">اردن</option>
-                                                <option value="KZ">قزاقستان</option>
-                                                <option value="KE">کنیا</option>
-                                                <option value="KI">کیریباتی</option>
-                                                <option value="KP"> دومینکا</option>
-                                                <option value="KR">جمهوری دمکوراتیک</option>
-                                                <option value="KW">کویت</option>
-                                                <option value="KG">قرقیزستان</option>
-                                                <option value="LA">جمهوری دموکراتیک خلق لائوس</option>
-                                                <option value="LV">لتونی</option>
-                                                <option value="LB">لبنان</option>
-                                                <option value="LS">لسوتو</option>
-                                                <option value="LR">لیبریا</option>
-                                                <option value="LY">لیبی</option>
-                                                <option value="LI">لیختن اشتاین</option>
-                                                <option value="LT">لیتوانی</option>
-                                                <option value="LU">لوکزامبورگ</option>
-                                                <option value="MO">ماکائو</option>
-                                                <option value="MK">یوگوسلاوی</option>
-                                                <option value="MG">ماداگاسکار</option>
-                                                <option value="MW">مالاوی</option>
-                                                <option value="MY">مالزی</option>
-                                                <option value="MV">مالدیو</option>
-                                                <option value="ML">مالی</option>
-                                                <option value="MT">مالت</option>
-                                                <option value="MH">جزایر مارشال</option>
-                                                <option value="MQ">مارتینیک</option>
-                                                <option value="MR">موریتانی</option>
-                                                <option value="MU">موریس</option>
-                                                <option value="YT">مایوت</option>
-                                                <option value="MX">مکزیک</option>
-                                                <option value="FM">استان فدرال</option>
-                                                <option value="MD">جمهوری</option>
-                                                <option value="MC">موناکو</option>
-                                                <option value="MN">مغولستان</option>
-                                                <option value="ME">مونته نگرو</option>
-                                                <option value="MS">مونتسرات</option>
-                                                <option value="MA">مراکش</option>
-                                                <option value="MZ">موزامبیک</option>
-                                                <option value="MM">میانمار</option>
-                                                <option value="NA">ناميبيا</option>
-                                                <option value="NR">نائورو</option>
-                                                <option value="NP">نپال</option>
-                                                <option value="NL">هلند</option>
-                                                <option value="NC">کالدونیای جدید</option>
-                                                <option value="NZ">نیوزلند</option>
-                                                <option value="NI">نیکاراگوئه</option>
-                                                <option value="NE">نیجر</option>
-                                                <option value="NG">نیجریه</option>
-                                                <option value="NU">نیو</option>
-                                                <option value="NF">جزیره نورفولک</option>
-                                                <option value="MP">جزایر ماریانای شمالی</option>
-                                                <option value="NO">نروژ</option>
-                                                <option value="OM">عمان</option>
-                                                <option value="PK">پاکستان</option>
-                                                <option value="PW">پالائو</option>
-                                                <option value="PS">اسرائیل</option>
-                                                <option value="PA">پاناما</option>
-                                                <option value="PG">گینه نو</option>
-                                                <option value="PY">پاراگوئه</option>
-                                                <option value="PE">پرو</option>
-                                                <option value="PH">فیلیپین</option>
-                                                <option value="PN">پیت کارین</option>
-                                                <option value="PL">لهستان</option>
-                                                <option value="PT">کشور پرتغال</option>
-                                                <option value="PR">پورتوریکو</option>
-                                                <option value="QA">قطر</option>
-                                                <option value="RE">تجدید دیدار</option>
-                                                <option value="RO">رومانی</option>
-                                                <option value="RU">فدراسیون روسیه</option>
-                                                <option value="RW">رواندا</option>
-                                                <option value="BL">سنت بارتلی</option>
-                                                <option value="SH">اقیانوسیه</option>
-                                                <option value="KN">سنت کیتس و نوویس</option>
-                                                <option value="LC">سنت لوسیا</option>
-                                                <option value="MF">سنت مارتین (قسمت فرانسوی)</option>
-                                                <option value="PM">سنت پیر و میکلون</option>
-                                                <option value="VC">سنت وینسنت و گرنادینها</option>
-                                                <option value="WS">ساموآ</option>
-                                                <option value="SM">سان مارینو</option>
-                                                <option value="ST">سائو تومه و پرینسیپ</option>
-                                                <option value="SA">عربستان سعودی</option>
-                                                <option value="SN">سنگال</option>
-                                                <option value="RS">صربستان</option>
-                                                <option value="SC">سیشل</option>
-                                                <option value="SL">سیرا لئون</option>
-                                                <option value="SG">سنگاپور</option>
-                                                <option value="SX">سینت مارتین (قسمت هلندی)</option>
-                                                <option value="SK">اسلواکی</option>
-                                                <option value="SI">اسلوونی</option>
-                                                <option value="SB">جزایر سلیمان</option>
-                                                <option value="SO">سومالی</option>
-                                                <option value="ZA">آفریقای جنوبی</option>
-                                                <option value="GS">جورجیا جنوبی و جزایر ساندویچ جنوبی</option>
-                                                <option value="SS">سودان جنوبی</option>
-                                                <option value="ES">اسپانیا</option>
-                                                <option value="LK">سری لانکا</option>
-                                                <option value="SD">سودان</option>
-                                                <option value="SR">سورینام</option>
-                                                <option value="SJ">سوالبارد و جان مین</option>
-                                                <option value="SZ">سوازیلند</option>
-                                                <option value="SE">سوئد</option>
-                                                <option value="CH">سوئیس</option>
-                                                <option value="SY">جمهوری عربی سوریه</option>
-                                                <option value="TW">چین</option>
-                                                <option value="TJ">تاجیکستان</option>
-                                                <option value="TZ">جمهوری متحد</option>
-                                                <option value="TH">تایلند</option>
-                                                <option value="TL">تیمور-لست</option>
-                                                <option value="TG">رفتن</option>
-                                                <option value="TK">توکلو</option>
-                                                <option value="TO">تونگا</option>
-                                                <option value="TT">ترینیداد و توباگو</option>
-                                                <option value="TN">تونس</option>
-                                                <option value="TR">بوقلمون</option>
-                                                <option value="TM">ترکمنستان</option>
-                                                <option value="TC">جزایر تورکس و کایکوس</option>
-                                                <option value="TV">تووالو</option>
-                                                <option value="UG">اوگاندا</option>
-                                                <option value="UA">اوکراین</option>
-                                                <option value="AE">امارات متحده عربی</option>
-                                                <option value="GB">انگلستان</option>
-                                                <option value="US">استان های متحد</option>
-                                                <option value="UM">جزایر متحد</option>
-                                                <option value="UY">اروگوئه</option>
-                                                <option value="UZ">ازبکستان</option>
-                                                <option value="VU">واناتو</option>
-                                                <option value="VE"> جمهوری بولیوی</option>
-                                                <option value="VN">ویتنام</option>
-                                                <option value="VG"> آمریکا</option>
-                                                <option value="VI"> ایالات متحده</option>
-                                                <option value="WF">والیس و فوتونا</option>
-                                                <option value="EH">صحرای غربی</option>
-                                                <option value="YE">یمن</option>
-                                                <option value="ZM">زامبیا</option>
-                                                <option value="ZW">زیمبابوه</option>
-                                            </select>
+                                            <input type="text" th:field="*{addressDTO.country}"
+                                                   class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                   name="country" id="country" placeholder="ایران"  />
                                         </div>
-                                        <!--end::Input-->
                                     </div>
 
-
-
                                     <div class="col-xl-6">
-                                        <!--begin::Input-->
                                         <div class="form-group">
                                             <label class="font-size-h6 font-weight-bolder text-dark">استان</label>
-                                            <input type="text"
+                                            <input type="text" th:field="*{addressDTO.province}"
                                                 class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
-                                                name="state" placeholder="استان" value="VIC" />
-                                            <span class="form-text text-muted">لطفا استان را وارد کنید</span>
+                                                name="province" id="province" placeholder="تهران"  />
                                         </div>
-                                        <!--end::Input-->
                                     </div>
 
-
-
-
                                 </div>
-                                <!--end::Row-->
 
-                                <!--begin::Row-->
                                 <div class="row">
 
-
-
                                     <div class="col-xl-6">
-                                        <!--begin::Input-->
                                         <div class="form-group">
                                             <label class="font-size-h6 font-weight-bolder text-dark">شهر</label>
-                                            <input type="text"
+                                            <input type="text" th:field="*{addressDTO.city}"
                                                 class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
-                                                name="city" placeholder="شهر" value="ملبورن" />
+                                                name="city" id="city" placeholder="تهران" />
                                         </div>
-                                        <!--end::Input-->
+
                                     </div>
 
                                     <div class="col-xl-6">
-                                        <!--begin::Input-->
                                         <div class="form-group">
                                             <label class="font-size-h6 font-weight-bolder text-dark">کد پستی</label>
-                                            <input type="text"
+                                            <input type="text" th:field="*{addressDTO.postalCode}" required maxlength="10"
                                                 class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
-                                                name="postcode" placeholder="کد پستی" value="3000" />
+                                                name="postalCode" id="postalCode" placeholder="1234567890" />
                                         </div>
-                                        <!--end::Input-->
                                     </div>
-
                                 </div>
-                                <!--end::Row-->
-
-                                <!--begin::Row-->
-                                <div class="row">
-
-
-
-
-
-                                    <div class="col-xl-6">
-                                        <!--begin::Input-->
-                                        <div class="form-group">
-                                            <label class="font-size-h6 font-weight-bolder text-dark">آدرس 1</label>
-                                            <input type="text"
-                                                class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
-                                                name="address1" placeholder="آدرس 1" value="آدرس 1" />
-                                        </div>
-                                        <!--end::Input-->
-                                    </div>
-
-
-
-
-
-
-
-
-
-
-                                    <div class="col-xl-6">
-                                        <!--begin::Input-->
-                                        <div class="form-group">
-                                            <label class="font-size-h6 font-weight-bolder text-dark">آدرس 2</label>
-                                            <input type="text"
-                                                class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
-                                                name="address1" placeholder="آدرس 2" value="آدرس 2" />
-                                        </div>
-                                        <!--end::Input-->
-                                    </div>
-
-
-
-
-
-
-
-
-                                </div>
-                                <!--end::Row-->
                             </div>
                             <!--end: Wizard Step 2-->
 
@@ -595,27 +320,41 @@
 
                                 <!--begin::Section-->
                                 <h4 class="font-weight-bolder mb-3">
-                                    تنظیمات اکانت:
+                                    اطلاعات شخصی:
                                 </h4>
-                                <div class="text-dark-50 font-weight-bold line-height-lg mb-8">
-                                    <div>نیک استون</div>
-                                    <div>+12233434-34</div>
-                                    <div>nick.stone@gmail.com</div>
-                                </div>
-                                <!--end::Section-->
+                                <div>
+                                    <div>
+                                        <label name="firstNameAndLastNameLabel" id="firstNameAndLastNameLabel"></label>
+                                    </div>
+                                    <div>
+                                        <label name="nationalCodeLabel" id="nationalCodeLabel"></label>
+                                    </div>
+                                    <div>
+                                        <label name="phoneNumberLabel" id="phoneNumberLabel"></label>
+                                    </div>
+                                    <div>
+                                        <label name="emailLabel" id="emailLabel"></label>
+                                    </div>
 
-                                <!--begin::Section-->
+                                </div>
                                 <h4 class="font-weight-bolder mb-3">
                                     جزییات آدرس:
                                 </h4>
-                                <div class="text-dark-50 font-weight-bold line-height-lg mb-8">
-                                    <div>آدرس 1</div>
-                                    <div>آدرس 2</div>
-                                    <div>ملبورن 3000, VIC, استرالیا</div>
+                                <div>
+                                    <div>
+                                        <label name="countryLabel" id="countryLabel"></label>
+                                    </div>
+                                    <div>
+                                        <label name="provinceLabel" id="provinceLabel"></label>
+                                    </div>
+                                    <div>
+                                        <label name="cityLabel" id="cityLabel"></label>
+                                    </div>
+                                    <div>
+                                        <label name="postalCodeLabel" id="postalCodeLabel"></label>
+                                    </div>
+
                                 </div>
-                                <!--end::Section-->
-
-
                             </div>
                             <!--end: Wizard Step 4-->
 
@@ -645,9 +384,9 @@
                                     </button>
                                 </div>
                                 <div>
-                                    <button type="button"
+                                    <button type="submit"
                                         class="btn btn-primary font-weight-bolder font-size-h6 pl-5 pr-8 py-4 my-3"
-                                        data-wizard-type="action-submit" type="submit"
+                                        data-wizard-type="action-submit"
                                         id="kt_login_signup_form_submit_button">
                                         ارسال
                                         <span class="svg-icon svg-icon-md ml-2">
@@ -667,9 +406,9 @@
                                                 </g>
                                             </svg>
                                             <!--end::Svg Icon--></span> </button>
-                                    <button type="button"
+                                    <button type="button" id="nextStepButton"
                                         class="btn btn-primary font-weight-bolder font-size-h6 pl-8 pr-4 py-4 my-3"
-                                        data-wizard-type="action-next">
+                                        data-wizard-type="action-next" onclick="nextButton();">
                                         گام بعدی
                                         <span class="svg-icon svg-icon-md ml-1">
                                             <!--begin::Svg Icon | path:media/svg/icons/Navigation/چپ-2.svg--><svg
