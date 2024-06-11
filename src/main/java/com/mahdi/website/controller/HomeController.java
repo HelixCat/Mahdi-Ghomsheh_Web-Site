@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Objects;
 
@@ -35,8 +34,8 @@ public class HomeController {
         return redirect;
     }
 
-    @PostMapping("/home")
-    public String login(UserDTO userDTO, Model model) throws Exception {
+    @GetMapping("/home")
+    public String returnToHome(UserDTO userDTO, Model model) {
         UserDTO userDetail = userService.loadUserDTOByEmail(userDTO.getEmail());
         model.addAttribute("userDetail", userDetail);
         return "home";

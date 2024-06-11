@@ -104,7 +104,7 @@
                 <!--begin::Signin-->
                 <div class="login-form login-form-signup">
                     <!--begin::Form-->
-                    <form th:action="@{/home}" method="post" th:object="${userDetail}"
+                    <form th:action="@{/home}" method="GET" th:object="${userDetail}"
                           class="form" novalidate="novalidate" id="kt_login_signup_form">
                         <!--begin: Wizard Step 1-->
                         <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
