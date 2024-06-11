@@ -6,6 +6,7 @@ import com.mahdi.website.service.validation.LoginValidationInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
@@ -36,7 +37,7 @@ public class IndexPageController {
     }
 
     @PostMapping("/save")
-    public String saveUser(UserDTO userDTO) throws Exception {
+    public String saveUser(@Validated UserDTO userDTO) throws Exception {
         userService.saveUser(userDTO);
         return "redirect:login";
     }
@@ -52,11 +53,11 @@ public class IndexPageController {
         String redirect = "redirect:";
         if (Objects.nonNull(userDTO)) {
             Boolean validateRequest = loginValidation.validateLoginRequest(userDTO.getEmail(), userDTO.getPassword());
+            UserDTO userDetail = userService.loadUserDTOByEmail(userDTO.getEmail());
             if (Boolean.TRUE.equals(validateRequest)) {
-                model.addAttribute("userDetail", userDTO);
+                model.addAttribute("userDetail", userDetail);
                 return "home";
             } else {
-                // User is invalid, return an error view or redirect to the login page with an error message
                 model.addAttribute("error", "Invalid credentials");
                 redirect = redirect + "login";
             }

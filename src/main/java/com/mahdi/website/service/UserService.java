@@ -45,7 +45,7 @@ public class UserService implements IUserService {
         User user = Objects.nonNull(userDetail) ? userDetail : new User();
         user.setActive(Boolean.TRUE);
         user.setManager(prepareAdminUser(userDTO));
-        user.setUserName(userDTO.getUserName());
+        user.setUsername(userDTO.getUsername());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
@@ -59,6 +59,7 @@ public class UserService implements IUserService {
     private List<Address> prepareAddress(AddressDTO addressDTO, User user) {
         List<Address> addressList = new ArrayList<>();
         Address address = modelMapper.map(addressDTO, Address.class);
+        address.setActive(Boolean.TRUE);
         address.setUser(user);
         addressList.add(address);
         return addressList;
@@ -107,6 +108,12 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public UserDTO loadUserDTOByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        return prepareUserDTO(user);
+    }
+
+    @Override
     public void updateUser(String userName, UserDTO userDTO) throws Exception {
         User user = loadUserByUserName(userName);
         if (Objects.nonNull(user)) {
@@ -124,6 +131,7 @@ public class UserService implements IUserService {
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
         userDTO.setEmail(user.getEmail());
+        userDTO.setUsername(user.getUsername());
         userDTO.setManager(user.getManager());
         userDTO.setNationalCode(user.getNationalCode());
         userDTO.setPhoneNumber(user.getPhoneNumber());

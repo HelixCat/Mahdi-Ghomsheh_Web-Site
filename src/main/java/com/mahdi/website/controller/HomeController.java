@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Objects;
 
@@ -20,10 +21,10 @@ public class HomeController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/profile/{userName}")
-    public String profile(@PathVariable String userName, Model model) {
+    @GetMapping(value = "/profile/{username}")
+    public String profile(@PathVariable String username, Model model) {
         String redirect = "redirect:";
-        UserDTO userDetail = userService.loadUserDTOByUserName(userName);
+        UserDTO userDetail = userService.loadUserDTOByUserName(username);
         if (Objects.nonNull(userDetail) && Objects.nonNull(userDetail.getAddressDTO())) {
             model.addAttribute("userDetail", userDetail);
             return "profile";
@@ -32,5 +33,12 @@ public class HomeController {
             redirect = redirect + "home";
         }
         return redirect;
+    }
+
+    @PostMapping("/home")
+    public String login(UserDTO userDTO, Model model) throws Exception {
+        UserDTO userDetail = userService.loadUserDTOByEmail(userDTO.getEmail());
+        model.addAttribute("userDetail", userDetail);
+        return "home";
     }
 }

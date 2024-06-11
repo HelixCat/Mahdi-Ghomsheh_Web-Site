@@ -201,10 +201,10 @@
                 <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
                      id="kt_quick_user_toggle">
                     <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">سلام، </span>
-                    <span th:text="${userDetail.fullName}"></span>
+                    <span th:text="${userDetail.firstName}"></span>
                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
                             <span class="symbol-label font-size-h5 font-weight-bold">م</span>
-                        </span>
+                    </span>
                 </div>
             </div>
             <!--end::User-->
@@ -817,9 +817,7 @@
                     <i class="symbol-badge bg-success"></i>
                 </div>
                 <div class="d-flex flex-column">
-                    <a th:href="@{/profile/{email}(email=${userDetail.user.email})}" class=" font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
                     <span th:text="${userDetail.fullName}"></span>
-                    </a>
                     <div class="text-muted mt-1">
                         توسعه اپلیکیشن
                     </div>
@@ -842,7 +840,7 @@
                                 </span>
                             </span>
                             <span class="navi-text text-muted text-hover-primary"
-                                  th:text="${userDetail.user.email}"></span>
+                                  th:text="${userDetail.email}"></span>
                         </span>
                         </a>
                         <a href="#" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">خروج</a>
@@ -858,10 +856,9 @@
 
         <!--begin::Nav-->
         <form id="profileForm" action="/profile" method="get">
-            <input type="hidden" name="email" th:value="${userDetail.user.email}"/>
             <div class="navi navi-spacer-x-0 p-0">
                 <!--begin::Item-->
-                <a th:href="@{/profile/{email}(email=${userDetail.user.email})}" class="navi-item">
+                <a th:href="@{/profile/{username}(username=${userDetail.username})}" class="navi-item">
                     <div class="navi-link">
                         <div class="symbol symbol-40 bg-light mr-3">
                             <div class="symbol-label">
@@ -880,7 +877,7 @@
                         </div>
                         <div class="navi-text">
                             <div class="font-weight-bold">
-                                <a th:href="@{/profile/{email}(email=${userDetail.user.email})}">
+                                <a th:href="@{/profile/{username}(username=${userDetail.username})}">
                                     پروفایل من
                                 </a>
                             </div>
