@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>IranCRM | ثبت نام</title>
+    <title>Ghomsheh | ثبت نام</title>
     <meta name="description" content="Singin page example" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -68,7 +68,7 @@
 
 
                     <!--begin: Wizard Nav-->
-                    <div class="wizard-nav pt-5 pt-lg-30">
+                    <div class="wizard-nav pt-1 pt-lg-2">
                         <!--begin::Wizard Steps-->
                         <div class="wizard-steps">
                             <!--begin::Wizard Step 1 Nav-->
@@ -149,8 +149,8 @@
                 <!--begin::Top-->
                 <div class="text-right d-flex justify-content-center">
                     <div class="top-signup text-right d-flex justify-content-end pt-5 pb-lg-0 pb-10">
-                        <span class="font-weight-bold text-muted font-size-h4">آیا به مشکل برخورده‌اید؟</span>
-                        <a href="Request support.html" class="font-weight-bolder text-primary font-size-h4 ml-2"
+                        <span class="font-weight-bold text-muted font-size-h5">آیا به مشکل برخورده‌اید؟</span>
+                        <a href="Request support.html" class="font-weight-bolder text-primary font-size-h5 ml-2"
                             id="kt_login_signup">کمک بگیر</a>
                     </div>
                 </div>
@@ -166,11 +166,12 @@
                             <!--begin: Wizard Step 1-->
                             <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
                                 <div class="pb-10 pb-lg-15">
-                                    <h3 class="font-weight-bolder text-dark display5">ساخت حساب کاربری</h3>
-                                    <div class="text-muted font-weight-bold font-size-h4">
+                                    <h4 class="font-weight-bolder text-dark display6">ساخت حساب کاربری</h4>
+                                    <div class="text-muted font-weight-bold font-size-h5">
                                         آیا حساب دارید؟
-                                        <a href="custom/pages/login/login-3/signin.html"
-                                            class="text-primary font-weight-bolder">ورود</a>
+                                        <a th:href="@{/login}" class="menu-link">
+                                            <span class="menu-text">ورود</span>
+                                        </a>
                                     </div>
                                 </div>
 
@@ -179,7 +180,7 @@
                                         <div class="form-group">
                                             <label class="font-size-h6 font-weight-bolder text-dark">نام</label>
                                             <input type="text" th:field="*{firstName}" required
-                                                class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                class="form-control h-auto py-4 px-6 border-0 rounded-lg font-size-h6"
                                                 name="firstName" id="firstName" placeholder="نام"/>
                                         </div>
                                     </div>
@@ -187,7 +188,7 @@
                                         <div class="form-group">
                                             <label class="font-size-h6 font-weight-bolder text-dark">نام خانوادگی</label>
                                             <input type="text" th:field="*{lastName}" required
-                                                class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                class="form-control h-auto py-4 px-6 border-0 rounded-lg font-size-h6"
                                                 name="lastName" id="lastName" placeholder="نام خانوادگی" value="" />
                                         </div>
                                     </div>
@@ -197,7 +198,7 @@
                                         <div class="form-group">
                                             <label class="font-size-h6 font-weight-bolder text-dark">شماره همراه</label>
                                             <input type="tel" th:field="*{phoneNumber}" required maxlength="11"
-                                                   class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                   class="form-control h-auto py-4 px-6 border-0 rounded-lg font-size-h6"
                                                    name="phoneNumber" id="phoneNumber" placeholder="09121010110" />
                                         </div>
                                     </div>
@@ -206,7 +207,7 @@
                                         <div class="form-group">
                                             <label class="font-size-h6 font-weight-bolder text-dark">کد ملی</label>
                                             <input type="tel" th:field="*{nationalCode}" required maxlength="11"
-                                                   class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                   class="form-control h-auto py-4 px-6 border-0 rounded-lg font-size-h6"
                                                    name="nationalCode" id="nationalCode" placeholder="1234506789" />
                                         </div>
                                     </div>
@@ -217,7 +218,7 @@
                                         <div class="form-group">
                                             <label class="font-size-h6 font-weight-bolder text-dark">نام کاربری</label>
                                             <input type="text" th:field="*{username}" required maxlength="16"
-                                                   class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                   class="form-control h-auto py-4 px-6 border-0 rounded-lg font-size-h6"
                                                    name="username" />
                                         </div>
                                         <!--end::Input-->
@@ -228,7 +229,7 @@
                                         <div class="form-group">
                                             <label class="font-size-h6 font-weight-bolder text-dark">پسورد</label>
                                             <input type="password" th:field="*{password}" required maxlength="4000"
-                                                   class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                   class="form-control h-auto py-4 px-6 border-0 rounded-lg font-size-h6"
                                                    name="password" />
                                         </div>
                                         <!--end::Input-->
@@ -239,7 +240,7 @@
                                         <div class="form-group">
                                             <label class="font-size-h6 font-weight-bolder text-dark">پست الکترونیک</label>
                                             <input type="email" th:field="*{email}" required maxlength="60"
-                                                   class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                                   class="form-control h-auto py-4 px-6 border-0 rounded-lg font-size-h6"
                                                    name="email" id="email" placeholder="a.b@example.com" />
                                         </div>
                                         <!--end::Input-->
@@ -319,7 +320,7 @@
                                 <!--end::Title-->
 
                                 <!--begin::Section-->
-                                <h4 class="font-weight-bolder mb-3">
+                                <h4 class="font-weight-bolder mb-1">
                                     اطلاعات شخصی:
                                 </h4>
                                 <div>
@@ -337,7 +338,7 @@
                                     </div>
 
                                 </div>
-                                <h4 class="font-weight-bolder mb-3">
+                                <h4 class="font-weight-bolder mb-1">
                                     جزییات آدرس:
                                 </h4>
                                 <div>
@@ -407,7 +408,7 @@
                                             </svg>
                                             <!--end::Svg Icon--></span> </button>
                                     <button type="button" id="nextStepButton"
-                                        class="btn btn-primary font-weight-bolder font-size-h6 pl-8 pr-4 py-4 my-3"
+                                        class="btn btn-primary font-weight-bolder font-size-h6 pl-8 pr-4 py-4 my-1"
                                         data-wizard-type="action-next" onclick="nextButton();">
                                         گام بعدی
                                         <span class="svg-icon svg-icon-md ml-1">

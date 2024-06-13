@@ -1,6 +1,5 @@
 package com.mahdi.website.service.validation;
 
-import com.mahdi.website.service.businesslogic.UserBusinessInterface;
 import com.mahdi.website.model.User;
 import com.mahdi.website.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +10,13 @@ import java.util.Objects;
 @Service
 public class LoginValidation implements LoginValidationInterface{
 
-    @Autowired
-    UserService userService;
+    final UserService userService;
 
     @Autowired
-    UserBusinessInterface userBusiness;
+    public LoginValidation(UserService userService) {
+        this.userService = userService;
+    }
+
 
     @Override
     public Boolean validateLoginRequest(String email, String Password) {
@@ -23,7 +24,7 @@ public class LoginValidation implements LoginValidationInterface{
         Boolean validPassword = Boolean.FALSE;
         if (Objects.nonNull(user)) {
             String hashedPassword = user.getPassword();
-            validPassword = userBusiness.isValidPasswordForLogin(Password, hashedPassword);
+            validPassword = userService.isValidPassword(Password, hashedPassword);
         }
         return validPassword;
     }

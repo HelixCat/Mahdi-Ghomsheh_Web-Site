@@ -26,7 +26,7 @@ public class IndexPageController {
     }
 
     @GetMapping("")
-    public String showHomePage() {
+    public String showIndexPage() {
         return "index";
     }
 

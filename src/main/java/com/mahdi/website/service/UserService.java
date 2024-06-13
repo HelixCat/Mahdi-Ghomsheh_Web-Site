@@ -1,14 +1,17 @@
 package com.mahdi.website.service;
 
 import com.mahdi.website.dto.AddressDTO;
+import com.mahdi.website.dto.ChangePasswordDTO;
 import com.mahdi.website.dto.UserDTO;
 import com.mahdi.website.model.Address;
 import com.mahdi.website.model.User;
 import com.mahdi.website.repository.AddressRepository;
 import com.mahdi.website.repository.UserRepository;
+import com.mahdi.website.service.exeception.BusinessException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -22,12 +25,14 @@ public class UserService implements IUserService {
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
     private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(AddressRepository addressRepository, UserRepository userRepository, ModelMapper modelMapper) {
+    public UserService(AddressRepository addressRepository, UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.addressRepository = addressRepository;
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -51,7 +56,7 @@ public class UserService implements IUserService {
         user.setEmail(userDTO.getEmail());
         user.setNationalCode(userDTO.getNationalCode());
         user.setPhoneNumber(userDTO.getPhoneNumber());
-        user.setPassword(prepareHashedPassword(userDTO));
+        user.setPassword(prepareHashedPassword(userDTO.getPassword()));
         user.setAddresses(prepareAddress(userDTO.getAddressDTO(), user));
         return user;
     }
@@ -73,8 +78,7 @@ public class UserService implements IUserService {
         }
     }
 
-    private String prepareHashedPassword(UserDTO userDTO) {
-        String password = userDTO.getPassword();
+    private String prepareHashedPassword(String password) {
         return createHashedPassword(password);
     }
 
@@ -124,6 +128,27 @@ public class UserService implements IUserService {
         }
     }
 
+    @Override
+    public void updateUserPassword(String username, ChangePasswordDTO changePasswordDTO) {
+        changePasswordDTO.setUserName(username);
+        changePassword(changePasswordDTO);
+    }
+
+    private UserDTO changePassword(ChangePasswordDTO changePasswordDTO) {
+        User user = loadUserByUserName(changePasswordDTO.getUserName());
+        if (Objects.nonNull(user)) {
+            if (Boolean.TRUE.equals(isValidPassword(changePasswordDTO.getOldPassword(), user.getPassword()))) {
+                String hashedPassword = prepareHashedPassword(changePasswordDTO.getNewPassword());
+                userRepository.updateUserPassword(user.getUsername(), hashedPassword);
+            } else {
+                throw new BusinessException("گذرواژه را اشتباه وارد کرده اید");
+            }
+        } else {
+            throw new BusinessException(" کاربری با این نام کاربری وجود ندارد " + changePasswordDTO.getUserName());
+        }
+        return prepareUserDTO(user);
+    }
+
     private UserDTO prepareUserDTO(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
@@ -142,5 +167,10 @@ public class UserService implements IUserService {
     private AddressDTO prepareAddressDTO(List<Address> addressList) {
         Address address = addressList.stream().findFirst().orElse(null);
         return modelMapper.map(address, AddressDTO.class);
+    }
+
+    @Override
+    public Boolean isValidPassword(String plainPassword, String hashedPassword) {
+        return passwordEncoder.matches(plainPassword, hashedPassword);
     }
 }

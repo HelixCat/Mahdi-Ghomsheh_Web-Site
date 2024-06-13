@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>IranCRM | profile</title>
+    <title>Ghomsheh | profile</title>
     <meta name="description" content="profile page example" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -109,8 +109,8 @@
                         <!--begin: Wizard Step 1-->
                         <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
                             <div class="pb-10 pb-lg-15">
-                                <h3 class="font-weight-bolder text-dark display5">صفحه مشخصات شما</h3>
-                                <div class="text-muted font-weight-bold font-size-h4">
+                                <h3 class="font-weight-bolder text-dark display5">صفحه مشخصات</h3>
+                                <div class="text-muted font-weight-bold font-size-h6">
                                     آیا قصد ویرایش دارید؟
                                     <a href=""
                                        class="text-primary font-weight-bolder">ویرایش</a>
@@ -121,14 +121,14 @@
                                 <div class="col-xl-6">
                                     <div class="form-group">
                                         <label class="font-size-h6 font-weight-bolder text-dark">نام</label>
-                                        <input class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                        <input class="form-control h-auto py-6 px-6 border-0 rounded-lg font-size-h6"
                                                name="firstName" id="firstName" type="text" th:field="${userDetail.firstName}"/>
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="form-group">
                                         <label class="font-size-h6 font-weight-bolder text-dark">نام خانوادگی</label>
-                                        <input class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                        <input class="form-control h-auto py-6 px-6 border-0 rounded-lg font-size-h6"
                                                name="lastName" id="lastName" type="text" th:field="${userDetail.lastName}" />
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@
                                 <div class="col-xl-6">
                                     <div class="form-group">
                                         <label class="font-size-h6 font-weight-bolder text-dark">شماره همراه</label>
-                                        <input class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                        <input class="form-control h-auto py-6 px-6 border-0 rounded-lg font-size-h6"
                                                name="phoneNumber" id="phoneNumber" type="text" th:field="${userDetail.phoneNumber}"/>
                                     </div>
                                 </div>
@@ -145,7 +145,7 @@
                                 <div class="col-xl-6">
                                     <div class="form-group">
                                         <label class="font-size-h6 font-weight-bolder text-dark">کد ملی</label>
-                                        <input class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                        <input class="form-control h-auto py-6 px-6 border-0 rounded-lg font-size-h6"
                                                name="nationalCode" id="nationalCode" type="text" th:field="${userDetail.nationalCode}"/>
                                     </div>
                                 </div>
@@ -155,7 +155,7 @@
                                     <!--begin::Input-->
                                     <div class="form-group">
                                         <label class="font-size-h6 font-weight-bolder text-dark">نام کاربری</label>
-                                        <input class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
+                                        <input class="form-control h-auto py-6 px-6 border-0 rounded-lg font-size-h6"
                                                name="username" id="username" type="text" th:field="${userDetail.username}" />
                                     </div>
                                     <!--end::Input-->
@@ -164,12 +164,9 @@
                                 <div class="col-xl-6">
                                     <!--begin::Input-->
                                     <div class="form-group">
-                                        <label class="font-size-h6 font-weight-bolder text-dark">کلمه عبور</label>
-                                        <div class="text-danger font-weight-bold font-size-h4">
-                                            آیا قصد ویرایش کلمه عبور را دارید؟
-                                            <a href=""
-                                               class="text-warning font-weight-bold">ویرایش کلمه عبور</a>
-                                        </div>
+                                        <label class="font-size-h6 font-weight-bolder text-dark">پست الکترونیک</label>
+                                        <input class="form-control h-auto py-6 px-6 border-0 rounded-lg font-size-h6"
+                                               name="email" id="email" type="email" th:field="${userDetail.email}"/>
                                     </div>
                                     <!--end::Input-->
                                 </div>
@@ -177,9 +174,11 @@
                                 <div class="col-xl-6">
                                     <!--begin::Input-->
                                     <div class="form-group">
-                                        <label class="font-size-h6 font-weight-bolder text-dark">پست الکترونیک</label>
-                                        <input class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6"
-                                               name="email" id="email" type="email" th:field="${userDetail.email}"/>
+                                        <label class="font-size-h6 font-weight-bolder text-dark">کلمه عبور</label>
+                                        <div class="text-danger font-weight-bold font-size-h6">
+                                            آیا قصد ویرایش کلمه عبور را دارید؟
+                                            <a th:href="@{/change-password/{username}(username=${userDetail.username})}" class="navi-item">ویرایش کلمه عبور</a>
+                                        </div>
                                     </div>
                                     <!--end::Input-->
                                 </div>
