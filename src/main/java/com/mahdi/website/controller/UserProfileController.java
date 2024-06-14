@@ -1,5 +1,6 @@
 package com.mahdi.website.controller;
 
+import com.mahdi.website.dto.AddressDTO;
 import com.mahdi.website.dto.ChangePasswordDTO;
 import com.mahdi.website.dto.UserDTO;
 import com.mahdi.website.service.IUserService;
@@ -50,6 +51,28 @@ public class UserProfileController {
             changePasswordDTO.setUserName(username);
             model.addAttribute("changePasswordDTO", changePasswordDTO);
             return "change_password_page";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @PostMapping("/add-address-to-user/{username}")
+    public String addAddress(@PathVariable String username, AddressDTO addressDTO, Model model) {
+        try {
+            UserDTO userDetail = userService.AddAddressToTheUser(username, addressDTO);
+            model.addAttribute("userDetail", userDetail);
+            return "profile";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/add-address/{username}")
+    public String addAddressPage(@PathVariable String username, Model model) {
+        try {
+            AddressDTO addressDTO = new AddressDTO();
+            addressDTO.setUsername(username);
+            model.addAttribute("addressDTO", addressDTO);
+            return "add-address";
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

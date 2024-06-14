@@ -43,4 +43,7 @@ public class User extends BaseEntity {
     private Boolean manager;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses;
+    @Lob
+    @Column(name = "c_profileImage", length = 200000)
+    private byte[] profileImage;
 }

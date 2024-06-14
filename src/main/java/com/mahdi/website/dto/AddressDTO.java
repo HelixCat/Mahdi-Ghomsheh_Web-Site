@@ -15,4 +15,5 @@ public class AddressDTO implements Serializable {
     private String province;
     private String city;
     private String postalCode;
+    private String username;
 }

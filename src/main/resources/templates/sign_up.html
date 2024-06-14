@@ -49,8 +49,8 @@
         document.getElementById('cityLabel').innerHTML = city;
         document.getElementById('postalCodeLabel').innerHTML = postalCode;
     }
-
 </script>
+
 
 <body id="kt_body"
     class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
@@ -127,8 +127,6 @@
                                 </div>
                             </div>
                             <!--end::Wizard Step 3 Nav-->
-
-
                         </div>
                         <!--end::Wizard Steps-->
                     </div>
@@ -161,7 +159,7 @@
                     <!--begin::Signin-->
                     <div class="login-form login-form-signup">
                         <!--begin::Form-->
-                        <form th:action="@{/save}" method="post" th:object="${userDTO}"
+                        <form th:action="@{/save}" method="post" th:object="${userDTO}" enctype="multipart/form-data"
                               class="form" novalidate="novalidate" id="kt_login_signup_form">
                             <!--begin: Wizard Step 1-->
                             <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
@@ -234,7 +232,8 @@
                                         </div>
                                         <!--end::Input-->
                                     </div>
-
+                                </div>
+                                <div class="row">
                                     <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
@@ -245,7 +244,13 @@
                                         </div>
                                         <!--end::Input-->
                                     </div>
-
+                                    <div class="col-xl-6">
+                                        <div class="form-group">
+                                            <label class="font-size-h6 font-weight-bolder text-dark">تصویر پروفایل</label>
+                                            <input type="file" name="profileImage" id="profileImage"
+                                                   class="form-control h-auto py-4 px-4 border-0 rounded-lg font-size-h6"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -523,5 +528,7 @@
     <!--end::Page Scripts-->
 </body>
 <!--end::Body-->
+
+
 
 </html>

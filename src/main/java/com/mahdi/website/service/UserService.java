@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 
@@ -58,6 +59,7 @@ public class UserService implements IUserService {
         user.setPhoneNumber(userDTO.getPhoneNumber());
         user.setPassword(prepareHashedPassword(userDTO.getPassword()));
         user.setAddresses(prepareAddress(userDTO.getAddressDTO(), user));
+        user.setProfileImage(userDTO.getImage());
         return user;
     }
 
@@ -82,12 +84,33 @@ public class UserService implements IUserService {
         return createHashedPassword(password);
     }
 
-    private List<Address> saveAddress(List<Address> addressList) {
+    @Override
+    public List<Address> saveAddress(List<Address> addressList) {
         for (Address address : addressList) {
             address.setActive(true);
             addressRepository.save(address);
         }
         return addressList;
+    }
+
+    @Override
+    public UserDTO AddAddressToTheUser(String username, AddressDTO addressDTO) {
+        User user = loadUserByUserName(username);
+        List<Address> addressList = user.getAddresses();
+        addressList.add(prepareAddressDTOToAddress(user, addressDTO));
+        saveAddress(addressList);
+        user = loadUserByUserName(username);
+        return prepareUserDTO(user);
+    }
+
+    private Address prepareAddressDTOToAddress(User user, AddressDTO addressDTO) {
+        Address address = new Address();
+        address.setCountry(addressDTO.getCountry());
+        address.setProvince(addressDTO.getProvince());
+        address.setCity(addressDTO.getCity());
+        address.setPostalCode(addressDTO.getPostalCode());
+        address.setUser(user);
+        return address;
     }
 
     private String createHashedPassword(String password) {
@@ -160,8 +183,14 @@ public class UserService implements IUserService {
         userDTO.setManager(user.getManager());
         userDTO.setNationalCode(user.getNationalCode());
         userDTO.setPhoneNumber(user.getPhoneNumber());
+        userDTO.setImage(user.getProfileImage());
+        userDTO.setBase64ProfileImage(prepareByteArrayToBase64(user.getProfileImage()));
         userDTO.setAddressDTO(prepareAddressDTO(user.getAddresses()));
         return userDTO;
+    }
+
+    private String prepareByteArrayToBase64(byte[] profileImage) {
+        return Base64.getEncoder().encodeToString(profileImage);
     }
 
     private AddressDTO prepareAddressDTO(List<Address> addressList) {

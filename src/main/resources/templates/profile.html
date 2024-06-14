@@ -23,9 +23,7 @@
     <link href="/css/themes/layout/aside/dark.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
 
     <link rel="shortcut icon" href="/media/logos/favicon.ico" />
-
 </head>
-
 <body id="kt_body"
     class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
@@ -193,7 +191,7 @@
                                 </h3>
                                 <div class="text-muted font-weight-bold font-size-h4">
                                     آدرس دیگری دارید؟
-                                    <a href="#" class="text-primary font-weight-bolder">افزودن آدرس</a>
+                                    <a th:href="@{/add-address/{username}(username=${userDetail.username})}" class="navi-item">افزودن آدرس</a>
                                 </div>
                             </div>
                             <div class="row">
@@ -398,6 +396,4 @@
     <script src="/js/pages/custom/login/login-3.js?v=7.0.6"></script>
     <!--end::Page Scripts-->
 </body>
-<!--end::Body-->
-
 </html>
