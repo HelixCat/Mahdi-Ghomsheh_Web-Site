@@ -20,6 +20,7 @@ public class UserDTO implements Serializable {
     private String nationalCode;
     private Boolean manager;
     private String password;
+    private String job;
     private byte[] image;
     private String base64ProfileImage;
     private AddressDTO addressDTO;

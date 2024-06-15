@@ -812,13 +812,16 @@
         <!--begin::Header-->
             <div class="d-flex align-items-center mt-5">
                 <div class="symbol symbol-100 mr-5">
-                    <div class="symbol-label" style="background-image:url('media/users/300_21.jpg')"></div>
+                    <span class="symbol symbol-lg-95 symbol-100 symbol-light-success">
+                        <img class="img-thumbnail" th:src="@{'data:image/jpg;base64,'+${userDetail.base64ProfileImage}}">
+                    </span>
+<!--                    <div class="symbol-label" style="background-image:url('media/users/300_21.jpg')"></div>-->
                     <i class="symbol-badge bg-success"></i>
                 </div>
                 <div class="d-flex flex-column">
                     <span th:text="${userDetail.fullName}"></span>
                     <div class="text-muted mt-1">
-                        توسعه اپلیکیشن
+                        <span th:text="${userDetail.job}"></span>
                     </div>
                     <div class="navi mt-2">
                         <a href="#" class="navi-item">

@@ -41,6 +41,8 @@ public class User extends BaseEntity {
     private String nationalCode;
     @Column(name = "c_manager")
     private Boolean manager;
+    @Column(name = "c_job")
+    private String job;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses;
     @Lob

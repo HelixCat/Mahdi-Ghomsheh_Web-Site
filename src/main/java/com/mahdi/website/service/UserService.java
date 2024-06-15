@@ -60,6 +60,7 @@ public class UserService implements IUserService {
         user.setPassword(prepareHashedPassword(userDTO.getPassword()));
         user.setAddresses(prepareAddress(userDTO.getAddressDTO(), user));
         user.setProfileImage(userDTO.getImage());
+        user.setJob(userDTO.getJob());
         return user;
     }
 
@@ -184,6 +185,7 @@ public class UserService implements IUserService {
         userDTO.setNationalCode(user.getNationalCode());
         userDTO.setPhoneNumber(user.getPhoneNumber());
         userDTO.setImage(user.getProfileImage());
+        userDTO.setJob(user.getJob());
         userDTO.setBase64ProfileImage(prepareByteArrayToBase64(user.getProfileImage()));
         userDTO.setAddressDTO(prepareAddressDTO(user.getAddresses()));
         return userDTO;
