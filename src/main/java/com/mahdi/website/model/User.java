@@ -46,6 +46,6 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses;
     @Lob
-    @Column(name = "c_profileImage", length = 200000)
+    @Column(name = "c_profile_image", length = 200000)
     private byte[] profileImage;
 }
