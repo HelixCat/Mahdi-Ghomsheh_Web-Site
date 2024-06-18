@@ -8,7 +8,7 @@ import com.mahdi.website.model.User;
 
 import java.util.List;
 
-public interface IUserService {
+public interface UserServiceInterface {
     List<User> getAllUsers();
     void saveUser(UserDTO userDTO) throws Exception;
 

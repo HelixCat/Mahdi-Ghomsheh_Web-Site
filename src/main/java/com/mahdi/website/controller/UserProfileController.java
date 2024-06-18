@@ -3,7 +3,7 @@ package com.mahdi.website.controller;
 import com.mahdi.website.dto.AddressDTO;
 import com.mahdi.website.dto.ChangePasswordDTO;
 import com.mahdi.website.dto.UserDTO;
-import com.mahdi.website.service.IUserService;
+import com.mahdi.website.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UserProfileController {
 
-    private final IUserService userService;
+    private final UserServiceInterface userService;
 
     @Autowired
-    public UserProfileController(IUserService userService) {
+    public UserProfileController(UserServiceInterface userService) {
         this.userService = userService;
     }
 
@@ -55,6 +55,7 @@ public class UserProfileController {
             throw new RuntimeException(e);
         }
     }
+
     @PostMapping("/add-address-to-user/{username}")
     public String addAddress(@PathVariable String username, AddressDTO addressDTO, Model model) {
         try {

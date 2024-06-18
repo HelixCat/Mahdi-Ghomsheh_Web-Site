@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class UserService implements IUserService {
+public class UserService implements UserServiceInterface {
 
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
@@ -158,7 +158,7 @@ public class UserService implements IUserService {
         changePassword(changePasswordDTO);
     }
 
-    private UserDTO changePassword(ChangePasswordDTO changePasswordDTO) {
+    private void changePassword(ChangePasswordDTO changePasswordDTO) {
         User user = loadUserByUserName(changePasswordDTO.getUserName());
         if (Objects.nonNull(user)) {
             if (Boolean.TRUE.equals(isValidPassword(changePasswordDTO.getOldPassword(), user.getPassword()))) {
@@ -170,7 +170,6 @@ public class UserService implements IUserService {
         } else {
             throw new BusinessException(" کاربری با این نام کاربری وجود ندارد " + changePasswordDTO.getUserName());
         }
-        return prepareUserDTO(user);
     }
 
     private UserDTO prepareUserDTO(User user) {

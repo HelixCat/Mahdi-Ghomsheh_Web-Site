@@ -2,7 +2,7 @@ package com.mahdi.website.controller;
 
 import com.mahdi.website.dto.UserDTO;
 
-import com.mahdi.website.service.IUserService;
+import com.mahdi.website.service.UserServiceInterface;
 import com.mahdi.website.service.validation.LoginValidationInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,13 +14,13 @@ import java.util.Objects;
 @Controller
 public class IndexPageController {
 
-    private final IUserService userService;
+    private final UserServiceInterface userService;
 
     private final LoginValidationInterface loginValidation;
 
 
     @Autowired
-    public IndexPageController(IUserService userService, LoginValidationInterface loginValidation) {
+    public IndexPageController(UserServiceInterface userService, LoginValidationInterface loginValidation) {
         this.userService = userService;
         this.loginValidation = loginValidation;
     }

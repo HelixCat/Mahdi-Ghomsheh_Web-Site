@@ -1,7 +1,7 @@
 package com.mahdi.website.service.validation;
 
 import com.mahdi.website.model.User;
-import com.mahdi.website.service.UserService;
+import com.mahdi.website.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +10,10 @@ import java.util.Objects;
 @Service
 public class LoginValidation implements LoginValidationInterface{
 
-    final UserService userService;
+    private UserServiceInterface userService;
 
     @Autowired
-    public LoginValidation(UserService userService) {
+    public LoginValidation(UserServiceInterface userService) {
         this.userService = userService;
     }
 
